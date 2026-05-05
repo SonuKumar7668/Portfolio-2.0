@@ -1,8 +1,45 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState, useCallback } from "react";
-// import SocialMedia from "../components/SocialMedia";
 import Link from "next/link";
+
+const SOCIAL_LINKS = [
+  {
+    label: "GitHub",
+    handle: "SonuKumar7668",
+    href: "https://github.com/SonuKumar7668",
+    icon: (
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Portfolio",
+    handle: "sonukumarsingh.tech",
+    href: "https://sonukumarsingh.tech/",
+    icon: (
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+        <polyline points="15 3 21 3 21 9" />
+        <line x1="10" y1="14" x2="21" y2="3" />
+      </svg>
+    ),
+  },
+  {
+    label: "Email",
+    handle: "sonu108rp@gmail.com",
+    href: "mailto:sonu108rp@gmail.com",
+    icon: (
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+      </svg>
+    ),
+  },
+];
+
+const STACK_TAGS = ["React", "Next.js", "Node.js", "MongoDB", "Express", "Tailwind"];
 
 export default function Hero() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -45,37 +82,153 @@ export default function Hero() {
       {/* ── STICKY HERO ── */}
       <div className="sticky top-0 overflow-hidden" style={{ height: "100svh" }}>
 
-        {/* DESKTOP: left-right split */}
+        {/* DESKTOP lg+ */}
         <div className="hidden lg:flex h-full">
+          {/* Dark left panel */}
           <div
-            className="relative flex items-center justify-center overflow-hidden flex-shrink-0"
+            className="relative flex flex-col justify-between overflow-hidden flex-shrink-0 py-12 xl:py-16"
             style={{ width: `${darkPanelRatio * 60}%`, backgroundColor: "#0E0E0E" }}
           >
             <GrainOverlay />
             <AccentLine direction="vertical" />
+
+            {/* Top: eyebrow */}
+            <div className="relative z-10 px-8 xl:px-12">
+              <p
+                className="text-[8px] xl:text-[9px] tracking-[0.45em] text-[#C9F23D] uppercase font-mono"
+                style={{ opacity: darkTextOpacity, transition: "opacity 0.06s" }}
+              >
+                STUDENT CURRENTLY BUILDING IN PUBLIC
+              </p>
+            </div>
+
+            {/* Middle: heading */}
             <DarkContent opacity={darkTextOpacity} layout="desktop" />
+
+            {/* Bottom: social links */}
+            <div
+              className="relative z-10 px-8 xl:px-12 flex flex-col gap-3"
+              style={{ opacity: darkTextOpacity, transition: "opacity 0.06s" }}
+            >
+              {SOCIAL_LINKS.map(({ label, handle, href, icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 w-fit"
+                  style={{ textDecoration: "none" }}
+                >
+                  <span className="text-white/30 group-hover:text-[#C9F23D] transition-colors duration-200">
+                    {icon}
+                  </span>
+                  <span className="text-[9px] xl:text-[10px] font-mono text-white/30 group-hover:text-white/70 tracking-wider transition-colors duration-200">
+                    {handle}
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="flex-1 flex items-center justify-center" style={{ backgroundColor: "#F6F4EF" }}>
-            <ProfileCard isDesktop scrollProgress={scrollProgress} />
+
+          {/* Light right panel */}
+          <div
+            className="flex-1 flex flex-col justify-between overflow-hidden py-12 xl:py-16"
+            style={{ backgroundColor: "#F6F4EF" }}
+          >
+            {/* Top right: index + availability */}
+            <div className="px-10 xl:px-14 flex items-center justify-between">
+              <p className="text-[9px] tracking-[0.4em] text-[#9A9785] uppercase font-mono">
+                Full Stack Dev
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C9F23D] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#C9F23D]" />
+                </span>
+                <p className="text-[8px] tracking-[0.4em] text-[#9A9785] uppercase font-mono">
+                  Open to work
+                </p>
+              </div>
+            </div>
+
+            {/* Center: profile */}
+            <div className="flex-1 flex items-center justify-center">
+              <ProfileCard isDesktop scrollProgress={scrollProgress} />
+            </div>
+
+            {/* Bottom right: stack tags */}
+            <div className="px-10 xl:px-14">
+              <p className="text-[8px] tracking-[0.4em] text-[#9A9785] uppercase font-mono mb-3">
+                Stack
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {STACK_TAGS.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-1 border border-[#E2DFD6] text-[8px] xl:text-[9px] tracking-widest uppercase font-mono text-[#777]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* TABLET: left-right split, narrower text */}
+        {/* TABLET md–lg */}
         <div className="hidden md:flex lg:hidden h-full">
           <div
-            className="relative flex items-center justify-center overflow-hidden flex-shrink-0"
+            className="relative flex flex-col justify-between overflow-hidden flex-shrink-0 py-10"
             style={{ width: `${darkPanelRatio * 55}%`, backgroundColor: "#0E0E0E" }}
           >
             <GrainOverlay />
             <AccentLine direction="vertical" />
+            <div
+              className="relative z-10 px-8"
+              style={{ opacity: darkTextOpacity, transition: "opacity 0.06s" }}
+            >
+              <p className="text-[8px] tracking-[0.45em] text-[#C9F23D] uppercase font-mono">
+                Portfolio · 2025
+              </p>
+            </div>
             <DarkContent opacity={darkTextOpacity} layout="tablet" />
+            <div
+              className="relative z-10 px-8 flex flex-col gap-2.5"
+              style={{ opacity: darkTextOpacity, transition: "opacity 0.06s" }}
+            >
+              {SOCIAL_LINKS.slice(0, 2).map(({ label, handle, href, icon }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                  className="group flex items-center gap-2.5 w-fit" style={{ textDecoration: "none" }}>
+                  <span className="text-white/30 group-hover:text-[#C9F23D] transition-colors duration-200">{icon}</span>
+                  <span className="text-[9px] font-mono text-white/30 group-hover:text-white/70 tracking-wider transition-colors duration-200">{handle}</span>
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="flex-1 flex items-center justify-center" style={{ backgroundColor: "#F6F4EF" }}>
-            <ProfileCard isDesktop={false} scrollProgress={scrollProgress} />
+
+          <div className="flex-1 flex flex-col justify-between overflow-hidden py-10"
+            style={{ backgroundColor: "#F6F4EF" }}>
+            <div className="px-8 flex items-center justify-between">
+              <p className="text-[8px] tracking-[0.4em] text-[#9A9785] uppercase font-mono">Full Stack Dev</p>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C9F23D]" />
+                <p className="text-[8px] tracking-[0.35em] text-[#9A9785] uppercase font-mono">Open to work</p>
+              </div>
+            </div>
+            <div className="flex-1 flex items-center justify-center">
+              <ProfileCard isDesktop={false} scrollProgress={scrollProgress} />
+            </div>
+            <div className="px-8">
+              <div className="flex flex-wrap gap-1.5">
+                {STACK_TAGS.slice(0, 4).map((tag) => (
+                  <span key={tag} className="px-2 py-1 border border-[#E2DFD6] text-[8px] tracking-widest uppercase font-mono text-[#777]">{tag}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* MOBILE: top-bottom stack */}
+        {/* MOBILE */}
         <div className="flex md:hidden flex-col h-full">
           <div
             className="relative flex items-center justify-center overflow-hidden flex-shrink-0"
@@ -85,8 +238,23 @@ export default function Hero() {
             <AccentLine direction="horizontal" />
             <DarkContent opacity={darkTextOpacity} layout="mobile" />
           </div>
-          <div className="flex-1 flex items-center justify-center overflow-hidden" style={{ backgroundColor: "#F6F4EF" }}>
-            <ProfileCard isDesktop={false} scrollProgress={scrollProgress} />
+          <div className="flex-1 flex flex-col justify-between overflow-hidden py-6 px-5"
+            style={{ backgroundColor: "#F6F4EF" }}>
+            <div className="flex items-center justify-between">
+              <p className="text-[8px] tracking-[0.4em] text-[#9A9785] uppercase font-mono">Sonu Kumar</p>
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C9F23D]" />
+                <p className="text-[8px] tracking-[0.3em] text-[#9A9785] uppercase font-mono">Open to work</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-center flex-1">
+              <ProfileCard isDesktop={false} scrollProgress={scrollProgress} />
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              {STACK_TAGS.slice(0, 4).map((tag) => (
+                <span key={tag} className="px-2 py-1 border border-[#E2DFD6] text-[7px] tracking-widest uppercase font-mono text-[#777]">{tag}</span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -94,152 +262,136 @@ export default function Hero() {
       {/* Scroll spacer */}
       <div style={{ height: "140svh" }} />
 
-{/* ── BELOW-FOLD ── */}
-<section
-  className="relative bg-[#F6F4EF] px-5 sm:px-10 lg:px-20 pt-14 sm:pt-20 pb-28 sm:pb-36"
-  style={{ opacity: belowOpacity, transform: `translateY(${belowTranslateY}px)` }}
->
-  <div className="max-w-5xl mx-auto">
-
-    {/* ── TOP ROW: label + name card ── */}
-    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16 border-b border-[#E2DFD6] pb-8 sm:pb-10">
-      <p className="text-[9px] sm:text-[10px] tracking-[0.45em] text-[#9A9785] uppercase font-mono">
-        01 / Overview
-      </p>
-      <div className="flex items-center gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#C9F23D]" />
-        <p className="text-[9px] sm:text-[10px] tracking-[0.3em] text-[#9A9785] uppercase font-mono">
-          CS Student · MERN Stack · Open to work
-        </p>
-      </div>
-    </div>
-
-    {/* ── HERO TEXT + BIO ── */}
-    <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 mb-14 sm:mb-20">
-      <div>
-        <h2
-          className="font-black uppercase text-[#0E0E0E] leading-[0.86] mb-6 sm:mb-8"
-          style={{ fontSize: "clamp(2.6rem, 6vw, 5.2rem)" }}
-        >
-          Building<br />
-          <span className="text-[#C9F23D]">real-world</span><br />
-          solutions.
-        </h2>
-        <p className="text-[#555] leading-[1.85] text-sm sm:text-base font-light max-w-sm mb-7 sm:mb-9">
-          Im <span className="text-[#0E0E0E] font-medium">Sonu Kumar</span> — a CS student
-          turning ideas into efficient, user-friendly web apps. I build with the
-          <span className="font-mono text-[11px] bg-[#0E0E0E] text-[#C9F23D] px-1.5 py-0.5 mx-1">MERN stack</span>,
-          explore AI integrations, and care deeply about shipping things that actually work.
-        </p>
-        <button
-          onClick={() => {
-            const el = document.getElementById("about");
-            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }}
-          className="inline-flex items-center gap-3 text-[9px] sm:text-[10px] tracking-widest uppercase text-[#0E0E0E] group font-mono bg-transparent border-0 p-0 cursor-pointer"
-        >
-          <span className="w-7 sm:w-9 h-px bg-[#C9F23D] group-hover:w-14 transition-all duration-500" />
-          Full story
-        </button>
-      </div>
-
-      {/* ── STAT CARDS ── */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 content-start">
-        {[
-          { val: "6+",  label: "Projects shipped",    sub: "From tools to platforms" },
-          { val: "9+",  label: "Technologies",         sub: "Across the full stack" },
-          { val: "3+",  label: "Languages",            sub: "JS · Java · C++" },
-          { val: "∞",   label: "Problems to solve",    sub: "Always learning" },
-        ].map(({ val, label, sub }) => (
-          <div
-            key={label}
-            className="group border border-[#E2DFD6] hover:border-[#0E0E0E] bg-[#F6F4EF] hover:bg-white p-4 sm:p-5 transition-all duration-300 relative overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 right-0 h-px bg-[#C9F23D] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            <p className="font-black text-[#0E0E0E] leading-none mb-2" style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)" }}>
-              {val}
+      {/* ── BELOW-FOLD ── */}
+      <section
+        className="relative bg-[#F6F4EF] px-5 sm:px-10 lg:px-20 pt-14 sm:pt-20 pb-28 sm:pb-36"
+        style={{ opacity: belowOpacity, transform: `translateY(${belowTranslateY}px)` }}
+      >
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16 border-b border-[#E2DFD6] pb-8 sm:pb-10">
+            <p className="text-[9px] sm:text-[10px] tracking-[0.45em] text-[#9A9785] uppercase font-mono">
+              01 / Overview
             </p>
-            <p className="text-[9px] sm:text-[10px] tracking-widest uppercase font-mono text-[#0E0E0E] mb-1">{label}</p>
-            <p className="text-[9px] sm:text-[10px] font-light text-[#9A9785]">{sub}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* ── SKILL BARS ── */}
-    <div className="mb-14 sm:mb-20">
-      <p className="text-[9px] sm:text-[10px] tracking-[0.45em] text-[#9A9785] uppercase font-mono mb-6 sm:mb-8">
-        Core stack
-      </p>
-      <div className="flex flex-col">
-        {[
-          { label: "JavaScript / TypeScript", level: 90, tag: "Primary" },
-          { label: "React / Next.js",          level: 85, tag: "Frontend" },
-          { label: "Node.js / Express.js",     level: 78, tag: "Backend" },
-          { label: "MongoDB / MySQL",           level: 72, tag: "Database" },
-          { label: "Java",                      level: 70, tag: "OOP · DSA" },
-          { label: "C++",                       level: 55, tag: "Systems" },
-        ].map((skill, i) => (
-          <div key={skill.label} className="group py-3 sm:py-4 border-b border-[#E2DFD6] flex items-center gap-3 sm:gap-5 hover:bg-white/60 px-2 -mx-2 transition-colors duration-200">
-            <span className="text-[8px] sm:text-[9px] font-mono text-[#D8D5CE] group-hover:text-[#C9F23D] transition-colors duration-200 w-4 shrink-0">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs text-[#0E0E0E] uppercase tracking-widest font-mono flex-1 leading-tight">
-              {skill.label}
-            </span>
-            <span className="hidden sm:block text-[8px] tracking-widest uppercase font-mono text-[#9A9785] w-16 text-right shrink-0">
-              {skill.tag}
-            </span>
-            <div className="w-16 sm:w-24 h-px bg-[#E2DFD6] relative shrink-0">
-              <div
-                className="absolute left-0 top-0 h-px bg-[#C9F23D] transition-all duration-500"
-                style={{ width: `${skill.level}%` }}
-              />
+            <div className="flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C9F23D]" />
+              <p className="text-[9px] sm:text-[10px] tracking-[0.3em] text-[#9A9785] uppercase font-mono">
+                CS Student · MERN Stack · Open to work
+              </p>
             </div>
-            <span className="text-[9px] font-mono text-[#9A9785] shrink-0 w-7 text-right">
-              {skill.level}
-            </span>
           </div>
-        ))}
-      </div>
-    </div>
 
-    {/* ── BOTTOM CTA ROW ── */}
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-0 pt-6 border-t border-[#E2DFD6]">
-      <p className="text-[9px] sm:text-[10px] tracking-[0.3em] text-[#9A9785] uppercase font-mono">
-        Explore the full picture
-      </p>
-      <div className="flex flex-wrap items-center gap-4 sm:gap-6">
-        {[
-          { section: "projects", label: "View projects" },
-          { section: "skills",   label: "All skills" },
-          { section: "about",    label: "About me" },
-        ].map(({ section, label }) => (
-          <button
-            key={section}
-            onClick={() => {
-              const el = document.getElementById(section);
-              if (el) {
-                const top = el.getBoundingClientRect().top + window.scrollY - 68;
-                window.scrollTo({ top, behavior: "smooth" });
-              }
-            }}
-            className="group inline-flex items-center gap-2.5 sm:gap-3 text-[9px] sm:text-[10px] tracking-[0.35em] uppercase font-mono bg-transparent border-0 p-0 cursor-pointer"
-          >
-            <span className="flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 border border-[#C9F23D] text-[#0E0E0E] group-hover:bg-[#C9F23D] transition-colors duration-300 text-xs">
-              →
-            </span>
-            <span className="text-[#555] group-hover:text-[#0E0E0E] transition-colors duration-200">{label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 mb-14 sm:mb-20">
+            <div>
+              <h2
+                className="font-black uppercase text-[#0E0E0E] leading-[0.86] mb-6 sm:mb-8"
+                style={{ fontSize: "clamp(2.6rem, 6vw, 5.2rem)" }}
+              >
+                Building<br />
+                <span className="text-[#C9F23D]">real-world</span><br />
+                solutions.
+              </h2>
+              <p className="text-[#555] leading-[1.85] text-sm sm:text-base font-light max-w-sm mb-7 sm:mb-9">
+                I'm <span className="text-[#0E0E0E] font-medium">Sonu Kumar</span> — a CS student
+                turning ideas into efficient, user-friendly web apps. I build with the
+                <span className="font-mono text-[11px] bg-[#0E0E0E] text-[#C9F23D] px-1.5 py-0.5 mx-1">MERN stack</span>,
+                explore AI integrations, and care deeply about shipping things that actually work.
+              </p>
+              <button
+                suppressHydrationWarning
+                onClick={() => {
+                  const el = document.getElementById("about");
+                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+                className="inline-flex items-center gap-3 text-[9px] sm:text-[10px] tracking-widest uppercase text-[#0E0E0E] group font-mono bg-transparent border-0 p-0 cursor-pointer"
+              >
+                <span className="w-7 sm:w-9 h-px bg-[#C9F23D] group-hover:w-14 transition-all duration-500" />
+                Full story
+              </button>
+            </div>
 
-  </div>
-</section>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 content-start">
+              {[
+                { val: "6+", label: "Projects shipped", sub: "From tools to platforms" },
+                { val: "9+", label: "Technologies",     sub: "Across the full stack" },
+                { val: "3+", label: "Languages",        sub: "JS · Java · C++" },
+                { val: "∞",  label: "Problems to solve",sub: "Always learning" },
+              ].map(({ val, label, sub }) => (
+                <div
+                  key={label}
+                  className="group border border-[#E2DFD6] hover:border-[#0E0E0E] bg-[#F6F4EF] hover:bg-white p-4 sm:p-5 transition-all duration-300 relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 right-0 h-px bg-[#C9F23D] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                  <p className="font-black text-[#0E0E0E] leading-none mb-2" style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)" }}>{val}</p>
+                  <p className="text-[9px] sm:text-[10px] tracking-widest uppercase font-mono text-[#0E0E0E] mb-1">{label}</p>
+                  <p className="text-[9px] sm:text-[10px] font-light text-[#9A9785]">{sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-14 sm:mb-20">
+            <p className="text-[9px] sm:text-[10px] tracking-[0.45em] text-[#9A9785] uppercase font-mono mb-6 sm:mb-8">
+              Core stack
+            </p>
+            <div className="flex flex-col">
+              {[
+                { label: "JavaScript / TypeScript", level: 90, tag: "Primary" },
+                { label: "React / Next.js",          level: 85, tag: "Frontend" },
+                { label: "Node.js / Express.js",     level: 78, tag: "Backend" },
+                { label: "MongoDB / MySQL",           level: 72, tag: "Database" },
+                { label: "Java",                      level: 70, tag: "OOP · DSA" },
+                { label: "C++",                       level: 55, tag: "Systems" },
+              ].map((skill, i) => (
+                <div key={skill.label} className="group py-3 sm:py-4 border-b border-[#E2DFD6] flex items-center gap-3 sm:gap-5 hover:bg-white/60 px-2 -mx-2 transition-colors duration-200">
+                  <span className="text-[8px] sm:text-[9px] font-mono text-[#D8D5CE] group-hover:text-[#C9F23D] transition-colors duration-200 w-4 shrink-0">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[10px] sm:text-xs text-[#0E0E0E] uppercase tracking-widest font-mono flex-1 leading-tight">{skill.label}</span>
+                  <span className="hidden sm:block text-[8px] tracking-widest uppercase font-mono text-[#9A9785] w-16 text-right shrink-0">{skill.tag}</span>
+                  <div className="w-16 sm:w-24 h-px bg-[#E2DFD6] relative shrink-0">
+                    <div className="absolute left-0 top-0 h-px bg-[#C9F23D]" style={{ width: `${skill.level}%` }} />
+                  </div>
+                  <span className="text-[9px] font-mono text-[#9A9785] shrink-0 w-7 text-right">{skill.level}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-0 pt-6 border-t border-[#E2DFD6]">
+            <p className="text-[9px] sm:text-[10px] tracking-[0.3em] text-[#9A9785] uppercase font-mono">
+              Explore the full picture
+            </p>
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              {[
+                { section: "projects", label: "View projects" },
+                { section: "skills",   label: "All skills" },
+                { section: "about",    label: "About me" },
+              ].map(({ section, label }) => (
+                <button
+                  key={section}
+                  suppressHydrationWarning
+                  onClick={() => {
+                    const el = document.getElementById(section);
+                    if (el) {
+                      const top = el.getBoundingClientRect().top + window.scrollY - 68;
+                      window.scrollTo({ top, behavior: "smooth" });
+                    }
+                  }}
+                  className="group inline-flex items-center gap-2.5 sm:gap-3 text-[9px] sm:text-[10px] tracking-[0.35em] uppercase font-mono bg-transparent border-0 p-0 cursor-pointer"
+                >
+                  <span className="flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 border border-[#C9F23D] text-[#0E0E0E] group-hover:bg-[#C9F23D] transition-colors duration-300 text-xs">→</span>
+                  <span className="text-[#555] group-hover:text-[#0E0E0E] transition-colors duration-200">{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
+/* ── Sub-components ── */
 
 function GrainOverlay() {
   return (
@@ -255,15 +407,12 @@ function GrainOverlay() {
 }
 
 function AccentLine({ direction }) {
-  if (direction === "vertical") {
-    return (
-      <div
-        className="absolute right-0 top-0 h-full w-px"
-        style={{ background: "linear-gradient(to bottom, transparent, #C9F23D 35%, #C9F23D 65%, transparent)", opacity: 0.45 }}
-      />
-    );
-  }
-  return (
+  return direction === "vertical" ? (
+    <div
+      className="absolute right-0 top-0 h-full w-px"
+      style={{ background: "linear-gradient(to bottom, transparent, #C9F23D 35%, #C9F23D 65%, transparent)", opacity: 0.45 }}
+    />
+  ) : (
     <div
       className="absolute bottom-0 left-0 right-0 h-px"
       style={{ background: "linear-gradient(to right, transparent, #C9F23D 35%, #C9F23D 65%, transparent)", opacity: 0.45 }}
@@ -286,9 +435,12 @@ function DarkContent({ opacity, layout }) {
       className={`relative z-10 w-full ${isMobile ? "flex flex-col items-center text-center px-6 py-4" : "flex flex-col items-start text-left px-8 xl:px-12"}`}
       style={{ opacity, transition: "opacity 0.06s" }}
     >
-      <p className="text-[8px] sm:text-[9px] tracking-[0.45em] text-[#C9F23D] uppercase font-mono mb-3 sm:mb-5">
-        Portfolio · 2025
-      </p>
+      {/* Mobile-only eyebrow */}
+      {isMobile && (
+        <p className="text-[8px] tracking-[0.45em] text-[#C9F23D] uppercase font-mono mb-3">
+          Portfolio · 2025
+        </p>
+      )}
 
       <h1 className={`text-white font-black uppercase leading-[0.85] ${isMobile ? "text-center" : ""}`}>
         <span className={`block ${headingSize}`}>WEB</span>
@@ -296,29 +448,20 @@ function DarkContent({ opacity, layout }) {
         <span className={`block text-[#C9F23D] ${headingSize}`}>ELOPER</span>
       </h1>
 
-      <p className={`mt-3 sm:mt-5 text-[#777] text-[11px] sm:text-xs font-light leading-relaxed ${isMobile ? "max-w-[220px]" : "max-w-[180px] xl:max-w-[220px]"}`}>
+      <p className={`mt-3 sm:mt-5 text-[#666] text-[11px] sm:text-xs font-light leading-relaxed ${isMobile ? "max-w-[220px]" : "max-w-[180px] xl:max-w-[240px]"}`}>
         Learning, building, and eager to solve real-world problems.
       </p>
-
-      {/* <Link
-        href="#about"
-        className="inline-flex items-center mt-5 sm:mt-7 gap-3 text-[9px] sm:text-[10px] tracking-widest uppercase text-[#C9F23D] group font-mono"
-      >
-        <span className="w-6 sm:w-8 h-px bg-[#C9F23D] group-hover:w-12 transition-all duration-300" />
-        Know more
-      </Link> */}
     </div>
   );
 }
 
 function ProfileCard({ isDesktop, scrollProgress }) {
   const spin = scrollProgress * 160;
-  const imgSize = isDesktop
-    ? "clamp(110px, 13vw, 190px)"
-    : "clamp(80px, 22vw, 130px)";
+  const imgSize = isDesktop ? "clamp(110px, 11vw, 160px)" : "clamp(80px, 22vw, 120px)";
 
   return (
-    <div className="flex flex-col items-center gap-3 sm:gap-5 px-4">
+    <div className="flex flex-col items-center gap-4 sm:gap-5 px-4">
+      {/* Avatar */}
       <div className="relative" style={{ width: imgSize, height: imgSize }}>
         <svg
           className="absolute"
@@ -333,17 +476,18 @@ function ProfileCard({ isDesktop, scrollProgress }) {
         >
           <circle cx="50" cy="50" r="47" fill="none" stroke="#C9F23D" strokeWidth="0.8" strokeDasharray="5 7" />
         </svg>
-<Image
-  className="w-full h-full rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
-  style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.15)" }}
-  src="/profile.jpg"
-  alt="Sonu Kumar"
-  width={140}
-  height={140}
-  priority
-/>
+        <Image
+          className="w-full h-full rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
+          style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.15)" }}
+          src="/profile.jpg"
+          alt="Sonu Kumar"
+          width={160}
+          height={160}
+          priority
+        />
       </div>
 
+      {/* Name */}
       <div className="text-center">
         <p className="text-[9px] sm:text-[10px] tracking-[0.45em] text-[#9A9785] uppercase font-mono">
           Sonu Kumar
@@ -353,7 +497,17 @@ function ProfileCard({ isDesktop, scrollProgress }) {
         </p>
       </div>
 
-      {/* <SocialMedia /> */}
+      {/* Desktop: quick project count */}
+      {isDesktop && (
+        <div className="flex items-center gap-6 mt-1">
+          {[["6+", "Projects"], ["9+", "Tech"]].map(([val, lbl]) => (
+            <div key={lbl} className="text-center">
+              <p className="font-black text-[#0E0E0E] text-lg leading-none">{val}</p>
+              <p className="text-[8px] tracking-[0.35em] text-[#9A9785] uppercase font-mono mt-0.5">{lbl}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

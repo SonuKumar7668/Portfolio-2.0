@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: "#about",    label: "About",    section: "about" },
   { href: "#skills",   label: "Skills",   section: "skills" },
   { href: "#projects", label: "Projects", section: "projects" },
+  { href: "#contact",  label: "Contact",  section: "contact" },
 ];
 
 const LIME = "#C9F23D";

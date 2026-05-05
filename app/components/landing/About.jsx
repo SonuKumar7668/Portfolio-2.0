@@ -132,7 +132,7 @@ export default function About() {
             <div className="flex items-center gap-4 mt-8 sm:mt-10">
               <div className="h-px flex-1 bg-[#E2DFD6]" />
               <span className="text-[9px] tracking-[0.4em] text-[#9A9785] uppercase font-mono shrink-0">
-                Est. 2025
+                Est. 2026
               </span>
               <div className="h-px w-8 bg-[#C9F23D]" />
             </div>

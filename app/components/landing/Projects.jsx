@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { ProjectInfo } from "@/app/Data/ProjectData";
+import { ProjectInfo } from "../../Data/ProjectData";
 
 const ALL_SKILLS = ["All", ...Array.from(new Set(ProjectInfo.flatMap((p) => p.skills)))];
 
@@ -134,26 +134,7 @@ export default function Projects() {
           </div>
         )}
       </div>
-
-      {/* ── BOTTOM CTA ── */}
-      <section className="bg-[#0E0E0E] relative overflow-hidden px-5 sm:px-10 lg:px-20 py-16 sm:py-24">
-        <GrainOverlay />
-        <div className="max-w-5xl mx-auto relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-          <div>
-            <p className="text-[9px] sm:text-[10px] tracking-[0.45em] text-[#C9F23D] uppercase font-mono mb-3">Get in touch</p>
-            <h2 className="font-black uppercase text-white leading-[0.9]" style={{ fontSize: "clamp(1.8rem, 4vw, 3.2rem)" }}>
-              Lets build<br />something.
-            </h2>
-          </div>
-          <a
-            href="mailto:sonukumar@example.com"
-            className="group inline-flex items-center gap-4 text-[9px] sm:text-[10px] tracking-[0.35em] uppercase font-mono shrink-0"
-          >
-            <span className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 border border-[#C9F23D] text-[#C9F23D] text-lg group-hover:bg-[#C9F23D] group-hover:text-[#0E0E0E] transition-all duration-300">→</span>
-            <span className="text-white/60 group-hover:text-white transition-colors duration-300">Say Hello</span>
-          </a>
-        </div>
-      </section>
+      
       <div className="h-px bg-[#0E0E0E]" />
     </main>
   );
